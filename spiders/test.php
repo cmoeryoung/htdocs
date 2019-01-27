@@ -32,21 +32,21 @@ function run()
 
     print_r($crawler);
 
-//    //使用crawler进行页面内容分析
-//    try{
-//        //这里使用的是xpath语法，轮询forFlow子类day中的元素，既页面上每一篇文章的块状元素，并且进行内容获取
-//        $crawler->filterXPath('//div[contains(@class, "forFlow")]/div[contains(@class, "day")]')->each(function(Crawler $node, $i) use (&$data){
-//            $item = [
-//                'date' => $node->filterXPath('//div[contains(@class, "dayTitle")]/a')->text(),
-//                'title' => $node->filterXPath('//div[contains(@class, "postTitle")]/a')->text(),
-//                'abstract' => $node->filterXPath('//div[contains(@class, "postCon")]/div')->text(),
-//                'url' => $node->filterXPath('//div[contains(@class, "postCon")]/div/a')->attr('href'),
-//            ];
-//            $data[] = $item;
-//        });
-//    }catch (\Exception $e){
-//        echo $e->getMessage() . PHP_EOL;
-//    }
-//    //打印结果
-//    print_r($data);
+    //使用crawler进行页面内容分析
+    try{
+        //这里使用的是xpath语法，轮询forFlow子类day中的元素，既页面上每一篇文章的块状元素，并且进行内容获取
+        $crawler->filterXPath('//div[contains(@class, "forFlow")]/div[contains(@class, "day")]')->each(function(Crawler $node, $i) use (&$data){
+            $item = [
+                'date' => $node->filterXPath('//div[contains(@class, "dayTitle")]/a')->text(),
+                'title' => $node->filterXPath('//div[contains(@class, "postTitle")]/a')->text(),
+                'abstract' => $node->filterXPath('//div[contains(@class, "postCon")]/div')->text(),
+                'url' => $node->filterXPath('//div[contains(@class, "postCon")]/div/a')->attr('href'),
+            ];
+            $data[] = $item;
+        });
+    }catch (\Exception $e){
+        echo $e->getMessage() . PHP_EOL;
+    }
+    //打印结果
+    print_r($data);
 }
