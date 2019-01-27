@@ -7,7 +7,9 @@
  */
 require "get_html.php";
 
-$html = get_html("https://www.baidu.com");
+header( "Content-type:text/html;Charset=utf-8" );
+
+$html = get_html("http://www.amazon.com");
 $pattern = '/<title>(.*?)<\/title>/si';
 preg_match($pattern,$html,$result);
-print_r($result);
+print_r($html);

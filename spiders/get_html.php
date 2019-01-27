@@ -5,11 +5,11 @@
  * Date: 2019-01-25
  * Time: 21:57
  */
+header( "Content-type:text/html;Charset=utf-8" );
 
 
 
-
-function get_html($url){
+function get_html($url = "",$cookie = ""){
     $user_agent_array = array(
         'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6',
         'Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5',
@@ -43,7 +43,20 @@ function get_html($url){
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
     //设置头文件的信息作为数据流输出
     curl_setopt($ch,CURLOPT_HEADER,0);
-    curl_close($ch,CURLOPT_USERAGENT,$user_agent);
+    curl_setopt($ch,CURLOPT_USERAGENT,$user_agent);
+    //对认证证书来源的检查
+    curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+    //对认证中检查SSL加密算法是否存在
+    curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
+    //设置ssl协议版本号
+    curl_setopt($ch,CURLOPT_SSLVERSION,1);
+    if ($cookie){
+        //如果cookie存在,则在头部添加cookie
+        curl_setopt($ch,CURLOPT_COOKIEFILE,$cookie);
+        curl_setopt($ch,CURLOPT_REFERER,"https://www.goole.com");
+    }
+    //跟踪爬取重定向页面
+    curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
     //执行并获取html文档内容
     $html = curl_exec($ch);
     //判断获取的内容是否为空
