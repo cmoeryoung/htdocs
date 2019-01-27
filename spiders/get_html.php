@@ -7,8 +7,6 @@
  */
 header( "Content-type:text/html;Charset=utf-8" );
 
-
-
 function get_html($url = "",$cookie = ""){
     $user_agent_array = array(
         'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6',
@@ -53,10 +51,12 @@ function get_html($url = "",$cookie = ""){
     if ($cookie){
         //如果cookie存在,则在头部添加cookie
         curl_setopt($ch,CURLOPT_COOKIEFILE,$cookie);
-        curl_setopt($ch,CURLOPT_REFERER,"https://www.goole.com");
+        curl_setopt($ch,CURLOPT_REFERER,"https://www.amazon.com");
     }
     //跟踪爬取重定向页面
     curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
+    //设置响应内容的编码方式
+    curl_setopt($ch,CURLOPT_ENCODING,"utf-8");
     //执行并获取html文档内容
     $html = curl_exec($ch);
     //判断获取的内容是否为空

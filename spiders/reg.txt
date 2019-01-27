@@ -1,0 +1,1 @@
+<li id=(.*?) data-result-rank=(.*?) data-asin=(.*?).*?sx-detail-display-trigger.*?s-result-item s-result-card-for-container a-declarative celwidget  ">.*?</li>
