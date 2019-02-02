@@ -49,7 +49,7 @@ if (isset($_POST['submit'])){
 
     if ($output_form) {
         ?>
-        <form method="post" action=<?php echo $_SERVER['PHP_SELF' ?>>
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <label for="subject">Subject of email:</label><br/>
             <input id="subject" name="subject" type="text" size="30"/><br/>
             <label for="elvismail">Body of email:</label><br/>
