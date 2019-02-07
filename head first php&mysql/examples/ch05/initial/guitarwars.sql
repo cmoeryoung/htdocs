@@ -1,3 +1,4 @@
+USE 'gwdb';
 CREATE TABLE `guitarwars` (
   `id` INT AUTO_INCREMENT,
   `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
