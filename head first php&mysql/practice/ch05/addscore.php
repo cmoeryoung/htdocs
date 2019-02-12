@@ -12,33 +12,36 @@
     <h2>Guitar Wars - Add Your Hight Score</h2>
 
     <?php
+    // Define the upload path and maximum file size constants
+    define('GW_UPLOADPATH','head first php&mysql/practice/ch05/images');
+
     if (isset($_POST['submit'])){
         //Grab the score data from the POST
         $name = $_POST['name'];
         $score = $_POST['score'];
+        $screenshot = $FILES['screenshot']['name'];
 
-        if (!empty($name) && !empty($score)){
-            $dbc = mysqli_connect('localhost','root','yhx1014','gwdb') or die('Connect MySQL Error');
+        if (!empty($name) && !empty($score) && !empty($screenshot)){
+            // Move the file to the target upload folder
+            $target = GW_UPLOADPATH.$screenshot;
+            if (move_uploaded_file($_FILES['screenshot']['tmp_name'],$target)){
+                // Connect to the database
+                $dbc = mysqli_connect('localhost','root','yhx1014','gwdb');
 
-            //Write the data to the database
-            $query = "INSERT INTO guitarwars values (0,NOW(),'$name','$score')";
-            mysqli_query($dbc,$query) or die('Insert Data Error');
+                // Write the data to the database
+                $query = "INSERT INTO guitarwars VALUES (0,NOW(),'$name','$score','$screenshot')";
+                mysqli_query($dbc,$query);
 
-            //Confirm  success with the user
-            echo '<p>Thanks for adding your new high score!</p>';
-            echo '<p><strong>Name:</strong>'.$name.'<br>';
-            echo '<strong>Score:</strong>'.$score.'</p>';
-            echo '<p><a href="index.php">&lt;&lt; Back to higt scores</a></p>';
-
-            // Clear the score data to clear the form
-            $name = "";
-            $score = "";
-
-            mysqli_close($dbc);
-        }else{
-            echo '<p class="error">Please enter all of the information to add'.'your high score.</p>';
+                // Confirm success with the user
+                echo '<p>Thanks for adding your new high score!</p>';
+                echo '<p><strong>Name:</strong>'.$name.'<br>';
+                echo '<strong>Score:</strong>'.$score.'<br>';
+                echo '<img src="'.GW_UPLOADPATH.$screenshot.'" alt="Score image"></p>';
+                echo '<p><a href="index.php">&lt;&lt; Back to high scores</a></p>';
+            }
         }
     }
+
     ?>
     <hr>
     <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
