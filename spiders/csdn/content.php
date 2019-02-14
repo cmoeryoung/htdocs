@@ -22,7 +22,7 @@ if ($rs->num_rows > 0){
         $url = $row['url'];
         $str = get_str($url);
         $block = '/<div class="gsinfocon">(.*?)<div class="gslxts">联系时请告知该信息来自一呼百应B2B搜索引擎<\/div>/si';
-        宾县
+
     }
 }
 
