@@ -2,7 +2,7 @@
 /**
  * User: cmoer
  * Date: 2019-02-14
- * Time: 00:58
+ * Time: 02:10
  */
 header('Content-Type:text/html;charset=UTF-8');
 set_time_limit(0);  //设置php运行时间为不限制
@@ -15,39 +15,15 @@ if ($mysqli->connect_errno > 0){
 }
 $mysqli->query('set names utf8');
 
-$sql = "select cid,url from category where pid != 0";
+$sql = "select url from content limit 1";
 $rs = $mysqli->query($sql);
-
-if($rs->num_rows > 0) {
-    while($row = $rs->fetch_assoc()) {
-        //print_r($row);
-        $cid = $row['cid'];
+if ($rs->num_rows > 0){
+    while ($row = $rs->fetch_assoc()){
         $url = $row['url'];
-        echo $url,'<br />';
-
         $str = get_str($url);
-
-        //echo $str;
-        $rule = '/<A href=.*?page=([0-9]+) class=menu8>尾页<\/A>/si';
-        preg_match($rule,$str,$totals);
-
-        if(! empty($totals)) {
-            $yeshu = $totals[1];
-            //echo $yeshu;
-            $sql = "update category set yeshu = {$yeshu} where cid = {$cid}";
-            $mysqli->query($sql);
-
-            if($mysqli->affected_rows > 0) {
-                echo 'Update Success<br />';
-            }else {
-                echo 'Update Failed<br />';
-                echo $mysqli->error,'<br />';
-                echo $sql;
-            }
-        }
+        $block = '/<div class="gsinfocon">(.*?)<div class="gslxts">联系时请告知该信息来自一呼百应B2B搜索引擎<\/div>/si';
+        宾县
     }
-
-    $rs->free();
 }
 
 $mysqli->close();
