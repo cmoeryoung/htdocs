@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="ca049c85-9a3f-4bc8-8471-17f25e1de5bf" name="localhost" url="http://localhost">
-        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="C:\MAMP\htdocs" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

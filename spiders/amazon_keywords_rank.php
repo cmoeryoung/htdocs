@@ -8,6 +8,7 @@
 require "get_html.php";
 
 header( "Content-type:text/html;Charset=utf-8" );
+
 $base_url = "https://www.amazon.com/s/?keywords=";
 $keywords = "fanny pack";
 $url = $base_url.$keywords;
